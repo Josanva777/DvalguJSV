@@ -7,35 +7,49 @@ document.addEventListener("DOMContentLoaded", () => {
     const prevButton = document.getElementById("prev-btn");
     const nextButton = document.getElementById("next-btn");
     
+    // Elementos del contador
+    const currentPageSpan = document.getElementById("current-page");
+    const totalPagesSpan = document.getElementById("total-pages");
+    
+    // Elementos de Modal
+    const hotspots = document.querySelectorAll(".hotspot");
+    const modals = document.querySelectorAll(".modal-overlay");
+    const closeButtons = document.querySelectorAll(".modal-close");
+    
     const totalSlides = slides.length;
-    let currentSlideIndex = 0; // Empezamos en la diapositiva 0
+    let currentSlideIndex = 0; 
+    
+    // Configurar el total de páginas
+    totalPagesSpan.textContent = totalSlides < 10 ? '0' + totalSlides : totalSlides;
 
     // --- Función para ir a una diapositiva específica ---
     function goToSlide(index) {
         if (index < 0 || index >= totalSlides) {
-            return; // No hacer nada si el índice está fuera de rango
+            return;
         }
         
-        // Usamos scrollIntoView para movernos suavemente a la diapositiva
+        // Scroll instantáneo (funciona horizontal)
         slides[index].scrollIntoView({
-            behavior: "smooth",
-            block: "start"
+            behavior: "auto", 
+            inline: "start" 
         });
         
         currentSlideIndex = index;
-        updateButtons();
     }
 
     // --- Función para actualizar el estado de los botones ---
     function updateButtons() {
-        // Deshabilitar "anterior" si estamos en la primera diapositiva
         prevButton.disabled = (currentSlideIndex === 0);
-        
-        // Deshabilitar "siguiente" si estamos en la última diapositiva
         nextButton.disabled = (currentSlideIndex === totalSlides - 1);
     }
+    
+    // --- Función para actualizar el contador ---
+    function updateCounter(index) {
+        const pageNumber = index + 1;
+        currentPageSpan.textContent = pageNumber < 10 ? '0' + pageNumber : pageNumber;
+    }
 
-    // --- Event Listeners para los botones ---
+    // --- Event Listeners para los botones de NAV ---
     prevButton.addEventListener("click", () => {
         goToSlide(currentSlideIndex - 1);
     });
@@ -44,28 +58,51 @@ document.addEventListener("DOMContentLoaded", () => {
         goToSlide(currentSlideIndex + 1);
     });
     
-    // --- Actualizar el índice actual basado en el scroll (para sincronizar) ---
-    // Usamos un IntersectionObserver para detectar qué slide está visible
     
+    // --- IntersectionObserver para efectos y contador ---
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Obtenemos el índice del slide visible
+            if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+                entry.target.classList.add("active");
                 const visibleSlideIndex = parseInt(entry.target.dataset.slideIndex, 10);
                 currentSlideIndex = visibleSlideIndex;
                 updateButtons();
+                updateCounter(currentSlideIndex);
+            } else {
+                entry.target.classList.remove("active");
             }
         });
     }, { 
-        root: container, // Observa dentro del contenedor
-        threshold: 0.6 // El slide debe estar al menos 60% visible
+        root: container,
+        threshold: 0.5 
     });
 
-    // Observar cada diapositiva
     slides.forEach(slide => {
         observer.observe(slide);
     });
 
-    // Inicializar los botones al cargar la página
-    updateButtons();
+    // --- LÓGICA DE MÚSICA ELIMINADA ---
+
+    // --- Lógica de Modales ---
+    hotspots.forEach(hotspot => {
+        hotspot.addEventListener("click", () => {
+            const modalId = hotspot.dataset.modalTarget;
+            document.getElementById(modalId).classList.add("active");
+        });
+    });
+
+    closeButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            button.closest(".modal-overlay").classList.remove("active");
+        });
+    });
+
+    modals.forEach(modal => {
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                modal.classList.remove("active");
+            }
+        });
+    });
+
 });

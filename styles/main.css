@@ -1,230 +1,278 @@
-/* --- Variables Globales (Colores y Fuentes) --- */
-:root {
-    /* Paleta de colores "Urbana" */
-    --color-pink: #F433FF;     /* Rosa vibrante */
-    --color-green: #20E8A4;    /* Verde menta/urbano */
-    --color-aqua: #20D3E8;     /* Azul aguamarina */
-    
-    /* Colores base para profesionalismo */
-    --color-bg: #1a1a1a;       /* Fondo oscuro (estilo urbano/noche) */
-    --color-text: #f0f0f0;     /* Texto principal (legible) */
-    --color-bg-content: #2c2c2c; /* Fondo para contenido */
-
-    /* Fuentes */
-    --font-title: 'Permanent Marker', cursive; /* Estilo "Graffiti" */
-    --font-body: 'Lato', sans-serif;           /* Estilo "Profesional" */
+/* --- Importar la fuente local --- */
+@font-face {
+    font-family: 'HelveticaProject';
+    /* Asegúrate que el nombre 'Helvetica.ttf' coincida con tu archivo */
+    src: url('../fonts/Helvetica.ttf') format('truetype');
+    font-weight: normal; /* 400 */
+    font-style: normal;
 }
 
-/* --- Reseteo Básico y Configuración Global --- */
+@font-face {
+    font-family: 'HelveticaProject';
+    /* Asegúrate que el nombre 'Helvetica-Bold.ttf' coincida con tu archivo */
+    src: url('../fonts/Helvetica-Bold.ttf') format('truetype');
+    font-weight: bold; /* 700 */
+    font-style: normal;
+}
+
+
+/* --- Variables Globales --- */
+:root {
+    --color-pink: #F433FF;
+    --color-green: #20E8A4;
+    --color-aqua: #20D3E8;
+    --color-bg: #1a1a1a;
+    --color-text: #f0f0f0;
+}
+
+/* --- Reseteo Básico --- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* --- Fondo Animado --- */
+body {
+    background: linear-gradient(-45deg, #1a1a1a, #2c002e, #002b2e, #002e1b);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    overflow: hidden; 
+    font-family: 'HelveticaProject', Arial, sans-serif; 
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 html {
-    font-family: var(--font-body);
-    background-color: var(--color-bg);
-    color: var(--color-text);
-    /* Deshabilitamos el scroll de la página entera */
     overflow: hidden; 
 }
 
-/* --- El Contenedor de la Presentación (Estilo Canva/PDF) --- */
+/* --- Contenedor Horizontal --- */
 .presentation-container {
-    /* Ocupa toda la pantalla */
     width: 100vw;
     height: 100vh;
-    
-    /* HABILITA EL SCROLL-SNAP */
-    /* El scroll-snap ocurre en el eje Y (vertical) y es 'mandatory' (forzado) */
-    scroll-snap-type: y mandatory;
-    
-    /* Habilitamos el scroll SÓLO para este contenedor */
-    overflow-y: scroll;
-    
-    /* Ocultamos la barra de scroll para un look más limpio */
-    scrollbar-width: none; /* Firefox */
+    scroll-snap-type: x mandatory; 
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scrollbar-width: none; 
 }
 .presentation-container::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
+    display: none; 
 }
 
-
-/* --- Estilo de cada "Diapositiva" --- */
+/* --- Transición Fluida --- */
 .slide {
-    /* Todas las diapositivas ocupan la pantalla completa */
     width: 100vw;
     height: 100vh;
-    
-    /* HACE QUE EL SCROLL "ENGANCHE" AQUÍ */
-    scroll-snap-align: start;
-    
-    /* Usamos Flexbox para centrar el contenido fácilmente */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem 5%; /* Espaciado interno */
-    
-    /* Efecto de transición suave al cargar */
-    opacity: 0;
-    animation: fadeIn 1s forwards;
+    flex-shrink: 0; 
+    scroll-snap-align: start; 
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain; 
+    opacity: 0; 
+    transition: opacity 0.6s ease-in-out;
+    background-color: transparent; 
+    position: relative; 
 }
 
-/* Animación simple */
-@keyframes fadeIn {
-    to { opacity: 1; }
+.slide.active {
+    opacity: 1; 
 }
 
-/* Contenedor del contenido dentro de la diapositiva */
-.slide-content {
-    width: 100%;
-    max-width: 900px; /* Ancho máximo para legibilidad */
-    padding: 2rem;
-    background-color: var(--color-bg-content);
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    border-left: 5px solid var(--color-pink);
-}
 
-/* --- Estilos de Texto --- */
-.title-graffiti {
-    font-family: var(--font-title);
-    font-size: 3.5rem;
-    color: var(--color-green); /* Color graffiti para títulos */
-    margin-bottom: 1rem;
-    line-height: 1.1;
-}
-
-p, li {
-    font-family: var(--font-body);
-    font-size: 1.2rem;
-    line-height: 1.7;
-    margin-bottom: 1rem;
-}
-
-ul {
-    padding-left: 20px;
-}
-
-li {
-    margin-bottom: 0.5rem;
-}
-
-/* --- Estilos Específicos de Diapositivas --- */
-
-/* Diapositiva de Título (más centrada) */
-.slide-title .slide-content {
-    text-align: center;
-    border-left-color: var(--color-aqua);
-    background: none; /* Sin fondo para la portada */
-    box-shadow: none;
-}
-.slide-title .subtitle {
-    font-size: 1.5rem;
-    font-weight: 300;
-    color: var(--color-text);
-}
-
-/* Diapositiva del GIF */
-.slide-gif .slide-content {
-    text-align: center;
-    border-left-color: var(--color-green);
-}
-.slide-gif img {
-    max-width: 100%;
-    height: auto;
-    max-height: 60vh; /* Límite de altura para el GIF */
-    border-radius: 8px;
-    margin-top: 1rem;
-    border: 3px solid var(--color-aqua);
-}
-
-/* Contenido en columnas */
-.content-columns {
-    display: flex;
-    gap: 2rem;
-}
-.content-columns .column {
-    flex: 1;
-}
-.content-columns h3 {
-    font-size: 2rem;
-    color: var(--color-pink);
-    margin-bottom: 1rem;
-}
+/* --- Carga de imágenes --- */
+.slide-1 { background-image: url('../assets/images/PORTADA.jpg'); }
+.slide-2 { background-image: url('../assets/images/CONCEPTO.jpg'); }
+.slide-3 { background-image: url('../assets/images/PRENDAS-GIF.gif'); }
+.slide-4 { background-image: url('../assets/images/ETIQUETA.jpg'); }
+.slide-5 { background-image: url('../assets/images/EMPAQUE.jpg'); }
+.slide-6 { background-image: url('../assets/images/MONTAJETUBOS.jpg'); }
+.slide-7 { background-image: url('../assets/images/PROVEEDORES.jpg'); }
+.slide-8 { background-image: url('../assets/images/ESTRATEGIA.jpg'); }
+.slide-9 { background-image: url('../assets/images/REDES.jpg'); }
 
 
 /* --- Botones de Navegación --- */
 .presentation-nav {
     position: fixed;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    flex-direction: row;
+    gap: 20px;
     z-index: 100;
+    background-color: rgba(30, 30, 30, 0.7);
+    backdrop-filter: blur(5px);
+    padding: 5px 15px;
+    border-radius: 30px;
 }
-
 .presentation-nav button {
-    width: 50px;
-    height: 50px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 2px solid var(--color-aqua);
+    font-family: 'HelveticaProject', Arial, sans-serif; 
+    font-weight: bold;
+    font-size: 2.5rem; 
     color: var(--color-aqua);
-    font-size: 1.5rem;
-    border-radius: 50%;
+    background: transparent;
+    border: none;
+    padding: 0;
+    text-shadow: none; 
     cursor: pointer;
     transition: all 0.3s ease;
 }
-
 .presentation-nav button:hover {
-    background-color: var(--color-aqua);
-    color: var(--color-bg);
+    color: var(--color-green);
+    transform: scale(1.1);
 }
-
-/* Ocultar botones cuando están deshabilitados (JS lo controlará) */
 .presentation-nav button:disabled {
-    opacity: 0.2;
+    color: rgba(255, 255, 255, 0.1);
     cursor: not-allowed;
+    transform: scale(1);
 }
 
+/* --- Marca de agua --- */
+.developer-watermark {
+    position: fixed; 
+    bottom: 10px;    
+    right: 15px;     
+    color: rgba(255, 255, 255, 0.15); 
+    font-size: 0.7rem;               
+    z-index: 1000;                   
+    pointer-events: none;
+    font-family: 'HelveticaProject', Arial, sans-serif; 
+}
 
-/* --- RESPONSIVE DESIGN (Móviles) --- */
+/* --- Contador de Páginas --- */
+.page-counter {
+    position: fixed;
+    top: 20px; 
+    left: 20px; 
+    z-index: 100;
+    color: rgba(255, 255, 255, 0.5); 
+    font-family: 'HelveticaProject', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+#current-page {
+    color: var(--color-text); 
+    font-size: 1.5rem;
+}
+
+/* --- BLOQUE DE ESTILOS DEL BOTÓN DE MUTE ELIMINADO --- */
+
+/* --- Estilos de Hotspot --- */
+.hotspot {
+    position: absolute;
+    width: 24px; 
+    height: 24px;
+    background-color: var(--color-aqua);
+    border: 2px solid var(--color-text);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 0.9;
+    animation: pulse 2s infinite;
+}
+.hotspot:hover {
+    opacity: 1;
+    transform: scale(1.2);
+}
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(32, 211, 232, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(32, 211, 232, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(32, 211, 232, 0); }
+}
+
+/* --- Estilos de Modal --- */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+.modal-content {
+    position: relative;
+    background-color: var(--color-bg);
+    padding: 2rem;
+    border-radius: 10px;
+    border-top: 5px solid var(--color-pink); /* Borde rosa por defecto */
+    max-width: 500px;
+    width: 90%;
+    color: var(--color-text);
+    font-family: 'HelveticaProject', Arial, sans-serif;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+#modal-aerosol .modal-content {
+    border-top-color: var(--color-green); 
+}
+.modal-content h3 {
+    font-family: 'HelveticaProject', Arial, sans-serif;
+    font-weight: bold;
+    color: var(--color-green);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+#modal-empaque .modal-content h3 {
+    color: var(--color-pink);
+}
+.modal-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+    font-weight: normal; 
+}
+.modal-close {
+    position: absolute;
+    top: 10px; right: 15px;
+    font-size: 2rem;
+    font-family: 'HelveticaProject', Arial, sans-serif;
+    color: var(--color-text);
+    background: none;
+    border: none;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+.modal-close:hover {
+    opacity: 1;
+}
+
+/* --- RESPONSIVE DESIGN --- */
 @media (max-width: 768px) {
-    .title-graffiti {
-        font-size: 2.5rem; /* Títulos más pequeños en móvil */
-    }
-
-    p, li {
-        font-size: 1rem; /* Texto de cuerpo más pequeño */
-    }
-
-    .slide-content {
-        padding: 1.5rem;
-    }
-    
-    .content-columns {
-        flex-direction: column; /* Columnas una encima de otra */
-    }
-
-    /* Movemos los botones para que no estorben */
-    .presentation-nav {
-        flex-direction: row;
-        top: auto;
-        bottom: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        right: auto;
-        background-color: var(--color-bg-content);
-        padding: 5px;
-        border-radius: 30px;
-    }
-
     .presentation-nav button {
-        width: 40px;
-        height: 40px;
+        font-size: 2rem;
+    }
+    .developer-watermark {
+        font-size: 0.6rem;
+        bottom: 5px;
+        right: 10px;
+    }
+    .page-counter {
+        top: 10px;
+        left: 10px;
         font-size: 1rem;
+    }
+    #current-page {
+        font-size: 1.2rem;
     }
 }

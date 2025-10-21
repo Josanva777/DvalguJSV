@@ -3,71 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto Universitario - Daniela Gutierrez</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
-
+    <title>CERO51 - CESDE</title>
+    
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
 
+
     <main class="presentation-container">
-
-        <section class="slide slide-title" data-slide-index="0">
-            <div class="slide-content">
-                <h1 class="title-graffiti">Nombre del Proyecto</h1>
-                <p class="subtitle">Presentado por: Daniela Gutierrez</p>
-            </div>
-        </section>
-
-        <section class="slide" data-slide-index="1">
-            <div class="slide-content">
-                <h2 class="title-graffiti">Introducción</h2>
-                <p>Aquí va el texto de la introducción. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et eros vitae nisl tincidunt aliquam.</p>
-                <ul>
-                    <li>Punto clave 1</li>
-                    <li>Punto clave 2</li>
-                    <li>Punto clave 3</li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="slide slide-gif" data-slide-index="2">
-            <div class="slide-content">
-                <h2 class="title-graffiti">Demostración</h2>
-                <p>A continuación, se muestra el GIF animado del prototipo.</p>
-                <img src="assets/images/presentacion.gif" alt="GIF de demostración del proyecto">
-            </div>
+        <section class="slide slide-1" data-slide-index="0"></section>
+        
+        <section class="slide slide-2" data-slide-index="1"></section>
+        
+        <section class="slide slide-3" data-slide-index="2"></section>
+        
+        <section class="slide slide-4" data-slide-index="3"></section>
+        
+        <section class="slide slide-5" data-slide-index="4">
+            <button class="hotspot" style="top: 60%; left: 30%;" data-modal-target="modal-empaque" title="Detalles del Empaque"></button>
+            <button class="hotspot" style="top: 40%; left: 70%;" data-modal-target="modal-aerosol" title="Contenido de la Lata"></button>
         </section>
         
-        <section class="slide" data-slide-index="3">
-            <div class="slide-content content-columns">
-                <div class="column">
-                    <h3 class="title-graffiti">Metodología</h3>
-                    <p>Descripción de la metodología usada. Se utilizó un enfoque ágil...</p>
-                </div>
-                <div class="column">
-                    <h3 class="title-graffiti">Resultados</h3>
-                    <p>Los resultados obtenidos fueron positivos, demostrando que...</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="slide" data-slide-index="4">
-            <div class="slide-content">
-                <h2 class="title-graffiti">Conclusión y Gracias</h2>
-                <p>Aquí va el párrafo de cierre del proyecto.</p>
-            </div>
-        </section>
-
+        <section class="slide slide-6" data-slide-index="5"></section>
+        
+        <section class="slide slide-7" data-slide-index="6"></section>
+        
+        <section class="slide slide-8" data-slide-index="7"></section>
+        
+        <section class="slide slide-9" data-slide-index="8"></section>
     </main>
 
     <nav class="presentation-nav">
-        <button id="prev-btn" title="Anterior">▲</button>
-        <button id="next-btn" title="Siguiente">▼</button>
+        <button id="prev-btn" title="Anterior">◄</button>
+        <button id="next-btn" title="Siguiente">►</button>
     </nav>
+
+    <div class="developer-watermark">
+        JSV
+    </div>
+
+    <div class="page-counter">
+        <span id="current-page">01</span> / <span id="total-pages">09</span>
+    </div>
+
+    <!-- BOTÓN DE MUTE ELIMINADO -->
+
+    <div class="modal-overlay" id="modal-empaque">
+        <div class="modal-content">
+            <button class="modal-close" title="Cerrar">×</button>
+            <h3>El Secreto del Empaque</h3>
+            <p>El empaque no es solo un contenedor, es parte de la experiencia CERO51. Este tubo robusto, inspirado en las latas de spray de graffiti, está fabricado con cartón kraft 100% reciclado. Su diseño no solo es estético sino también funcional, ofreciendo protección superior a la prenda en su interior y un toque urbano auténtico. Al abrirlo, la anticipación de lo que contiene se convierte en un ritual.</p>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-aerosol">
+        <div class="modal-content">
+            <button class="modal-close" title="Cerrar">×</button>
+            <h3>Sorpresa Interior: Prenda y Aerosol</h3>
+            <p>Dentro de cada tubo, el cliente descubre una prenda exclusiva de CERO51, cuidadosamente doblada, acompañada de un mini-aerosol personalizado. Este aerosol no es solo un detalle; es una invitación a la creatividad.</p>
+        </div>
+    </div>
 
     <script src="scripts/app.js"></script>
 </body>
