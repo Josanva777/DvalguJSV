@@ -1,0 +1,230 @@
+/* --- Variables Globales (Colores y Fuentes) --- */
+:root {
+    /* Paleta de colores "Urbana" */
+    --color-pink: #F433FF;     /* Rosa vibrante */
+    --color-green: #20E8A4;    /* Verde menta/urbano */
+    --color-aqua: #20D3E8;     /* Azul aguamarina */
+    
+    /* Colores base para profesionalismo */
+    --color-bg: #1a1a1a;       /* Fondo oscuro (estilo urbano/noche) */
+    --color-text: #f0f0f0;     /* Texto principal (legible) */
+    --color-bg-content: #2c2c2c; /* Fondo para contenido */
+
+    /* Fuentes */
+    --font-title: 'Permanent Marker', cursive; /* Estilo "Graffiti" */
+    --font-body: 'Lato', sans-serif;           /* Estilo "Profesional" */
+}
+
+/* --- Reseteo Básico y Configuración Global --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: var(--font-body);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    /* Deshabilitamos el scroll de la página entera */
+    overflow: hidden; 
+}
+
+/* --- El Contenedor de la Presentación (Estilo Canva/PDF) --- */
+.presentation-container {
+    /* Ocupa toda la pantalla */
+    width: 100vw;
+    height: 100vh;
+    
+    /* HABILITA EL SCROLL-SNAP */
+    /* El scroll-snap ocurre en el eje Y (vertical) y es 'mandatory' (forzado) */
+    scroll-snap-type: y mandatory;
+    
+    /* Habilitamos el scroll SÓLO para este contenedor */
+    overflow-y: scroll;
+    
+    /* Ocultamos la barra de scroll para un look más limpio */
+    scrollbar-width: none; /* Firefox */
+}
+.presentation-container::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+
+/* --- Estilo de cada "Diapositiva" --- */
+.slide {
+    /* Todas las diapositivas ocupan la pantalla completa */
+    width: 100vw;
+    height: 100vh;
+    
+    /* HACE QUE EL SCROLL "ENGANCHE" AQUÍ */
+    scroll-snap-align: start;
+    
+    /* Usamos Flexbox para centrar el contenido fácilmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 5%; /* Espaciado interno */
+    
+    /* Efecto de transición suave al cargar */
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+
+/* Animación simple */
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+/* Contenedor del contenido dentro de la diapositiva */
+.slide-content {
+    width: 100%;
+    max-width: 900px; /* Ancho máximo para legibilidad */
+    padding: 2rem;
+    background-color: var(--color-bg-content);
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    border-left: 5px solid var(--color-pink);
+}
+
+/* --- Estilos de Texto --- */
+.title-graffiti {
+    font-family: var(--font-title);
+    font-size: 3.5rem;
+    color: var(--color-green); /* Color graffiti para títulos */
+    margin-bottom: 1rem;
+    line-height: 1.1;
+}
+
+p, li {
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 0.5rem;
+}
+
+/* --- Estilos Específicos de Diapositivas --- */
+
+/* Diapositiva de Título (más centrada) */
+.slide-title .slide-content {
+    text-align: center;
+    border-left-color: var(--color-aqua);
+    background: none; /* Sin fondo para la portada */
+    box-shadow: none;
+}
+.slide-title .subtitle {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--color-text);
+}
+
+/* Diapositiva del GIF */
+.slide-gif .slide-content {
+    text-align: center;
+    border-left-color: var(--color-green);
+}
+.slide-gif img {
+    max-width: 100%;
+    height: auto;
+    max-height: 60vh; /* Límite de altura para el GIF */
+    border-radius: 8px;
+    margin-top: 1rem;
+    border: 3px solid var(--color-aqua);
+}
+
+/* Contenido en columnas */
+.content-columns {
+    display: flex;
+    gap: 2rem;
+}
+.content-columns .column {
+    flex: 1;
+}
+.content-columns h3 {
+    font-size: 2rem;
+    color: var(--color-pink);
+    margin-bottom: 1rem;
+}
+
+
+/* --- Botones de Navegación --- */
+.presentation-nav {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 100;
+}
+
+.presentation-nav button {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid var(--color-aqua);
+    color: var(--color-aqua);
+    font-size: 1.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.presentation-nav button:hover {
+    background-color: var(--color-aqua);
+    color: var(--color-bg);
+}
+
+/* Ocultar botones cuando están deshabilitados (JS lo controlará) */
+.presentation-nav button:disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
+}
+
+
+/* --- RESPONSIVE DESIGN (Móviles) --- */
+@media (max-width: 768px) {
+    .title-graffiti {
+        font-size: 2.5rem; /* Títulos más pequeños en móvil */
+    }
+
+    p, li {
+        font-size: 1rem; /* Texto de cuerpo más pequeño */
+    }
+
+    .slide-content {
+        padding: 1.5rem;
+    }
+    
+    .content-columns {
+        flex-direction: column; /* Columnas una encima de otra */
+    }
+
+    /* Movemos los botones para que no estorben */
+    .presentation-nav {
+        flex-direction: row;
+        top: auto;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        right: auto;
+        background-color: var(--color-bg-content);
+        padding: 5px;
+        border-radius: 30px;
+    }
+
+    .presentation-nav button {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Universitario - Daniela Gutierrez</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+
+    <main class="presentation-container">
+
+        <section class="slide slide-title" data-slide-index="0">
+            <div class="slide-content">
+                <h1 class="title-graffiti">Nombre del Proyecto</h1>
+                <p class="subtitle">Presentado por: Daniela Gutierrez</p>
+            </div>
+        </section>
+
+        <section class="slide" data-slide-index="1">
+            <div class="slide-content">
+                <h2 class="title-graffiti">Introducción</h2>
+                <p>Aquí va el texto de la introducción. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et eros vitae nisl tincidunt aliquam.</p>
+                <ul>
+                    <li>Punto clave 1</li>
+                    <li>Punto clave 2</li>
+                    <li>Punto clave 3</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="slide slide-gif" data-slide-index="2">
+            <div class="slide-content">
+                <h2 class="title-graffiti">Demostración</h2>
+                <p>A continuación, se muestra el GIF animado del prototipo.</p>
+                <img src="assets/images/presentacion.gif" alt="GIF de demostración del proyecto">
+            </div>
+        </section>
+        
+        <section class="slide" data-slide-index="3">
+            <div class="slide-content content-columns">
+                <div class="column">
+                    <h3 class="title-graffiti">Metodología</h3>
+                    <p>Descripción de la metodología usada. Se utilizó un enfoque ágil...</p>
+                </div>
+                <div class="column">
+                    <h3 class="title-graffiti">Resultados</h3>
+                    <p>Los resultados obtenidos fueron positivos, demostrando que...</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide-index="4">
+            <div class="slide-content">
+                <h2 class="title-graffiti">Conclusión y Gracias</h2>
+                <p>Aquí va el párrafo de cierre del proyecto.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <nav class="presentation-nav">
+        <button id="prev-btn" title="Anterior">▲</button>
+        <button id="next-btn" title="Siguiente">▼</button>
+    </nav>
+
+    <script src="scripts/app.js"></script>
+</body>
+</html>
