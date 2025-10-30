@@ -239,7 +239,7 @@ html {
   scroll-snap-align: start;
   background-position: center center;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: contain; /* Usa 'cover' si quieres que cubra todo, 'contain' si quieres ver la imagen completa */
   opacity: 0;
   transition: opacity 0.4s ease-out;
   background-color: transparent;
@@ -253,34 +253,49 @@ html {
   opacity: 1;
 }
 
-/* --- Carga de imágenes --- */
+/* --- Carga de imágenes AJUSTADA --- */
+
+/* Diapositiva 1: Portada */
 .slide-1 {
   background-image: url("../assets/images/PORTADA.jpg");
 }
-.slide-2 {
+/* Diapositiva 2: CONCEPTO (NUEVO) */
+.slide-2.slide-concepto {
   background-image: url("../assets/images/CONCEPTO.jpg");
 }
-.slide-3 {
+/* Diapositiva 3: MUJERES (NUEVO) */
+.slide-3.slide-mujeres {
+  background-image: url("../assets/images/MUJERES.jpg");
+}
+/* Diapositiva 4: PRENDAS (Originalmente slide-3) */
+.slide-4.slide-prendas {
   background-image: url("../assets/images/PRENDAS-GIF.gif");
 }
-.slide-4 {
+/* Diapositiva 5: ETIQUETA (Originalmente slide-4) */
+.slide-5.slide-etiqueta {
   background-image: url("../assets/images/ETIQUETA.jpg");
 }
-.slide-5 {
+/* Diapositiva 6: EMPAQUE/HOTSPOTS (Originalmente slide-5) */
+.slide-6.slide-empaque {
   background-image: url("../assets/images/EMPAQUE.jpg");
 }
-.slide-6 {
+/* Diapositiva 7: MONTAJE (Originalmente slide-6) */
+.slide-7.slide-montaje {
   background-image: url("../assets/images/MONTAJETUBOS.jpg");
 }
-.slide-7 {
+/* Diapositiva 8: PROVEEDORES (Originalmente slide-7) */
+.slide-8.slide-proveedores {
   background-image: url("../assets/images/PROVEEDORES.jpg");
 }
-.slide-8 {
+/* Diapositiva 9: ESTRATEGIA (Originalmente slide-8) */
+.slide-9.slide-estrategia {
   background-image: url("../assets/images/ESTRATEGIA.jpg");
 }
-.slide-9 {
+/* Diapositiva 10: REDES (Originalmente slide-9) */
+.slide-10.slide-redes {
   background-image: url("../assets/images/REDES.jpg");
 }
+
 
 /* --- NAVEGACIÓN SUTIL INFERIOR DERECHA --- */
 .presentation-nav {

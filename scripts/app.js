@@ -57,7 +57,8 @@ class FuturisticPresentation {
     this.modals = document.querySelectorAll(".modal-overlay");
     this.closeButtons = document.querySelectorAll(".modal-close");
 
-    this.totalSlides = this.slides.length;
+    // NOTA: Se actualizará a 10 slides
+    this.totalSlides = this.slides.length; 
     this.totalPagesSpan.textContent =
       this.totalSlides < 10 ? "0" + this.totalSlides : this.totalSlides;
   }
@@ -118,13 +119,13 @@ class FuturisticPresentation {
     const opacity = Math.random() * 0.3 + 0.1; // Menos opacidad
 
     particle.style.cssText = `
-            width: ${size}px;
-            height: ${size}px;
-            left: ${startX}px;
-            opacity: ${opacity};
-            animation-duration: ${animationDuration}s;
-            animation-delay: ${Math.random() * 3}s;
-        `;
+                width: ${size}px;
+                height: ${size}px;
+                left: ${startX}px;
+                opacity: ${opacity};
+                animation-duration: ${animationDuration}s;
+                animation-delay: ${Math.random() * 3}s;
+            `;
 
     this.particlesContainer.appendChild(particle);
     this.particlesArray.push(particle);
@@ -223,12 +224,14 @@ class FuturisticPresentation {
 
   // === TIMELINE NAVIGATION ===
   setupTimelineNavigation() {
+    // NOMBRES AJUSTADOS para 10 slides: Concepto y Mujeres se movieron.
     const slideNames = [
       "Portada",
       "Concepto",
+      "Mujeres",
       "Prendas",
       "Etiqueta",
-      "Empaque",
+      "Empaque", // Contiene los Hotspots
       "Montaje",
       "Proveedores",
       "Estrategia",
@@ -373,9 +376,11 @@ class FuturisticPresentation {
 
   // === PRELOAD DE IMÁGENES ===
   preloadImages() {
+    // Preload de todas las imágenes usadas como fondo
     const imageUrls = [
       "../assets/images/PORTADA.jpg",
       "../assets/images/CONCEPTO.jpg",
+      "../assets/images/MUJERES.jpg",
       "../assets/images/PRENDAS-GIF.gif",
       "../assets/images/ETIQUETA.jpg",
       "../assets/images/EMPAQUE.jpg",
